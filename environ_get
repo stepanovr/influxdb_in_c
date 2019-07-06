@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo
+echo "IP address:  $INFDB_IP"
+echo "Port:        $INFDB_PORT"
+echo
+
