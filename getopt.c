@@ -17,6 +17,11 @@ char param_db_name[IPADDRLEN];
 
 int param_port = 0;
 
+void usage()
+{
+	printf(" -a address of influxdb server\n -p port of influxdb server\n -c create influxdb darabase\n -d database name\n");
+}
+
 int ctrl_opts (int argc, char **argv)
 {
 	int index;
@@ -66,6 +71,7 @@ int ctrl_opts (int argc, char **argv)
 
 				return 1;
 			default:
+				usage();
 				abort ();
 		}
 
