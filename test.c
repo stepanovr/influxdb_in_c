@@ -113,7 +113,7 @@ int main(int argc, char **argv)
     while(!is_empty_queue()){
         item = pop();
 //        printf("\n===========\n%s\n===========\n", item->payload->string);
-//        post_http_direct(&c, item->payload->string);
+        post_http_direct(&c, item->payload->string);
         free(item->payload->string);
         free(item->payload);
         free(item);

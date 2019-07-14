@@ -94,11 +94,11 @@ int create_database(influx_client_t *c, char *name_db)
         return -2;
     }
     iv[1].iov_len = snprintf((char*)iv[1].iov_base, len, "q=CREATE%%20DATABASE%%20%s\r\n", name_db);
-iv[1].iov_len -= 2;
+    iv[1].iov_len -= 2;
 //POST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE rx_tx
 //q=CREATE%20DATABASE%20rx_tx
     for(;;) {
-        iv[0].iov_len = snprintf((char*)iv[0].iov_base, len, "POST /query HTTP/1.1\r\nHost: %s:%d\r\nContent-Length: %zd\r\n\r\n",
+        iv[0].iov_len = snprintf((char*)iv[0].iov_base, len, "POST /query HTTP/1.1\r\nHost: %s:%d\r\nAccept: */*\r\nContent-Length: %zd\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\n",
              c->host, c->port, iv[1].iov_len);
         if((int)iv[0].iov_len >= len && !(iv[0].iov_base = (char*)realloc(iv[0].iov_base, len *= 2))) {
 
