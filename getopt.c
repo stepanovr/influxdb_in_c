@@ -19,7 +19,11 @@ int param_port = 0;
 
 void usage()
 {
-	printf(" -a address of influxdb server\n -p port of influxdb server\n -c create influxdb darabase\n -d database name\n");
+	printf(" -a address of influxdb server\n"
+               " -p port of influxdb server\n"
+               " -c create influxdb darabase\n"
+               " -d database name\n"
+               " -s use a stdin string as a message\n");
 }
 
 int ctrl_opts (int argc, char **argv)
@@ -30,7 +34,7 @@ int ctrl_opts (int argc, char **argv)
 	opterr = 0;
 
 
-	while ((c = getopt (argc, argv, "a:bcd:p:i:")) != -1)
+	while ((c = getopt (argc, argv, "a:bcsd:p:i:")) != -1)
 		switch (c)
 		{
 			case 'a':
@@ -50,6 +54,9 @@ int ctrl_opts (int argc, char **argv)
 				break;
                         case 'c':
                                 SET_INPUT_PARAM(CFLAG);
+                                break;
+                        case 's':
+                                SET_INPUT_PARAM(SFLAG);
                                 break;
 			case 'd':
 				SET_INPUT_PARAM(DFLAG);

@@ -22,6 +22,9 @@ int work(influx_client_t* c);
 extern char param_addr[];
 extern char param_interface[];
 extern char param_db_name[];
+#define BUFFER_LEN	1000
+char buffer[BUFFER_LEN];
+
 
 extern int param_port;
 
@@ -104,10 +107,24 @@ int main(int argc, char **argv)
 
     printf("\nserver: %s:%d\n", cnf.server_addr, cnf.port);
 
+
     if(GET_INPUT_PARAM(CFLAG)){
         create_database(&c, param_db_name);
         return 0;
     }
+
+    if(GET_INPUT_PARAM(SFLAG)){
+	int len;
+	char* cr;
+	fgets(buffer, BUFFER_LEN, stdin);
+	len =  strlen(buffer);
+	cr = strchr(buffer, '\n');
+	len = cr - buffer;
+	buffer[len] = '\0';
+        post_http_send_line(&c, buffer, strlen(buffer));
+        return 0;
+    }
+
 
     measure_net();
     while(!is_empty_queue()){

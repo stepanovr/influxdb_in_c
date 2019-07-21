@@ -19,6 +19,7 @@
 #define DFLAG   (1 << 3)
 #define IFLAG   (1 << 4)
 #define PFLAG   (1 << 5)
+#define SFLAG   (1 << 6)
 
 
 #define SERVER_ADDRESS_LEN      100
